@@ -1,20 +1,41 @@
-with open("books/frankenstein") as f:
-    file_contents = f.read()
-def counter():
-    char_count = dict()
-    strings = file_contents.split()
-    for string in strings:
-        for char in string:
-            if char.isalpha(): 
-                char = char.lower()
-                if char in char_count:
-                    char_count[char] += 1
-                else:
-                    char_count[char] = 1
-    myKeys = list(char_count.keys())
-    myKeys.sort()
-    sorted_dict = {i: char_count[i] for i in myKeys}
-    print(sorted_dict)
-counter()
+book_path = "books/frankenstein"
 
-"vegas mandos come with perks win a hackerrank"
+def main():
+    file_contents = file_reader(book_path)
+    char_dict = to_char_dict(file_contents)
+    sorted_dict = special_sort(char_dict)
+    wc = word_count(file_contents)
+
+    print("This is a book report on Frankenstein")
+    print(f"There were {wc} words in this book")
+    for char in sorted_dict:
+        print(f"The letter {char} was found {sorted_dict[char]} times")
+
+
+def file_reader(bp):
+    with open(bp) as book:
+        return book.read()
+
+def word_count(f):
+    file = f.split()
+    return len(file)
+
+def to_char_dict(file):
+    char_dict = dict()
+    for char in file:
+        if not char.isalpha():
+            continue
+        else:
+            char = char.lower()
+            if char in char_dict:
+                char_dict[char] += 1
+            else:
+                char_dict[char] = 1
+    return char_dict
+
+def special_sort(cd):
+    myKeys = list(cd.keys())
+    myKeys.sort()
+    return {i: cd[i] for i in myKeys}
+
+main()
