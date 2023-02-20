@@ -16,3 +16,5 @@ def counter():
     sorted_dict = {i: char_count[i] for i in myKeys}
     print(sorted_dict)
 counter()
+
+"vegas mandos come with perks win a hackerrank"
